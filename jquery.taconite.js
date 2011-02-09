@@ -289,8 +289,12 @@ function go(xml) {
             wrapped = "<" + cdataWrap + ">" + $.trim(s) + "</" + cdataWrap + ">";
             $el = $($.innerShiv(wrapped, false));
 
+            // dirty ie fix to remove unwanted empty tbody's when dealing
+            // with thead and tfoot elements wrapped in table
+            $el.children('tbody:empty').remove();
+
             // remove wrapper node if possible
-            var $ch = $el.children();
+            $ch = $el.children();
             if ($ch.size() == 1)
                 return $ch[0];
             return $el[0];
