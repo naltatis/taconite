@@ -284,14 +284,16 @@ function go(xml) {
         };
         
         function handleCDATA(s) {
-            var el = document.createElement(cdataWrap);
-            el.appendChild($.innerShiv(s)); // naltatis: to support html5 elements in ie
-            
+            var $el, $ch, wrapped;
+
+            wrapped = "<" + cdataWrap + ">" + $.trim(s) + "</" + cdataWrap + ">";
+            $el = $($.innerShiv(wrapped, false));
+
             // remove wrapper node if possible
-            var $el = $(el), $ch = $el.children();
+            var $ch = $el.children();
             if ($ch.size() == 1)
                 return $ch[0];
-            return el;
+            return $el[0];
         };
         
         function fixTextNode(s) {
