@@ -1,3 +1,6 @@
+// naltatis: added innerShiv to support html5 elements in ie
+// see: http://jdbartlett.github.com/innershiv/
+
 /*!
  * jQuery Taconite plugin - A port of the Taconite framework by Ryan Asleson and
  *     Nathaniel T. Schutta: http://taconite.sourceforge.net/
@@ -282,7 +285,7 @@ function go(xml) {
         
         function handleCDATA(s) {
             var el = document.createElement(cdataWrap);
-            el.innerHTML = s;
+            el.appendChild($.innerShiv(s)); // naltatis: to support html5 elements in ie
             
             // remove wrapper node if possible
             var $el = $(el), $ch = $el.children();
